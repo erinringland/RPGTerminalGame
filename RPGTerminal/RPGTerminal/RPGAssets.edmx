@@ -1,0 +1,279 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="RPGModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Items">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="HitPoints" Type="float" />
+          <Property Name="inInventory" Type="bit" Nullable="false" />
+          <Property Name="Category" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DefensePoints" Type="float" />
+        </EntityType>
+        <EntityType Name="Monsters">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="HealthPoints" Type="int" Nullable="false" />
+          <Property Name="HitPoints" Type="int" Nullable="false" />
+          <Property Name="DefensePoints" Type="int" Nullable="false" />
+          <Property Name="isFinal" Type="bit" Nullable="false" />
+          <Property Name="CoinDrop" Type="int" Nullable="false" />
+          <Property Name="Defeated" Type="bit" Nullable="false" />
+          <Property Name="itemID" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'RPG.dbo.Player' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="HitPoints" />
+            <PropertyRef Name="Coins" />
+            <PropertyRef Name="HealthPoints" />
+          </Key>
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="HitPoints" Type="int" Nullable="false" />
+          <Property Name="OffensiveItem" Type="int" />
+          <Property Name="DefensiveItem" Type="int" />
+          <Property Name="Coins" Type="int" Nullable="false" />
+          <Property Name="HealthPoints" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="DefensiveItems">
+          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
+          <End Role="Player" Type="Self.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="DefensiveItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Monsters_Items">
+          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
+          <End Role="Monsters" Type="Self.Monsters" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Monsters">
+              <PropertyRef Name="itemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="OffensiveItems">
+          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
+          <End Role="Player" Type="Self.Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="OffensiveItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RPGModelStoreContainer">
+          <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Monsters" EntityType="Self.Monsters" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Player" EntityType="Self.Player" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Player].[Name] AS [Name], 
+    [Player].[HitPoints] AS [HitPoints], 
+    [Player].[OffensiveItem] AS [OffensiveItem], 
+    [Player].[DefensiveItem] AS [DefensiveItem], 
+    [Player].[Coins] AS [Coins], 
+    [Player].[HealthPoints] AS [HealthPoints]
+    FROM [dbo].[Player] AS [Player]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="DefensiveItems" Association="Self.DefensiveItems">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Monsters_Items" Association="Self.FK_Monsters_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Monsters" EntitySet="Monsters" />
+          </AssociationSet>
+          <AssociationSet Name="OffensiveItems" Association="Self.OffensiveItems">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Player" EntitySet="Player" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="RPGModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Item">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HitPoints" Type="Double" />
+          <Property Name="inInventory" Type="Boolean" Nullable="false" />
+          <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DefensePoints" Type="Double" />
+          <NavigationProperty Name="Monsters" Relationship="Self.FK_Monsters_Items" FromRole="Items" ToRole="Monsters" />
+          <NavigationProperty Name="Players" Relationship="RPGModel.FK_Player_Items" FromRole="Item" ToRole="Player" />
+          <NavigationProperty Name="Players1" Relationship="RPGModel.FK_Player_Items1" FromRole="Item" ToRole="Player" />
+        </EntityType>
+        <EntityType Name="Monster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="HealthPoints" Type="Int32" Nullable="false" />
+          <Property Name="HitPoints" Type="Int32" Nullable="false" />
+          <Property Name="DefensePoints" Type="Int32" Nullable="false" />
+          <Property Name="isFinal" Type="Boolean" Nullable="false" />
+          <Property Name="CoinDrop" Type="Int32" Nullable="false" />
+          <Property Name="Defeated" Type="Boolean" Nullable="false" />
+          <Property Name="itemID" Type="Int32" />
+          <NavigationProperty Name="Item" Relationship="Self.FK_Monsters_Items" FromRole="Monsters" ToRole="Items" />
+        </EntityType>
+        <Association Name="FK_Monsters_Items">
+          <End Role="Items" Type="Self.Item" Multiplicity="0..1" />
+          <End Role="Monsters" Type="Self.Monster" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Items">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Monsters">
+              <PropertyRef Name="itemID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="RPGEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Items" EntityType="Self.Item" />
+          <EntitySet Name="Monsters" EntityType="Self.Monster" />
+          <AssociationSet Name="FK_Monsters_Items" Association="Self.FK_Monsters_Items">
+            <End Role="Items" EntitySet="Items" />
+            <End Role="Monsters" EntitySet="Monsters" />
+          </AssociationSet>
+          <EntitySet Name="Players" EntityType="RPGModel.Player" />
+          <AssociationSet Name="FK_Player_Items" Association="RPGModel.FK_Player_Items">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Player" EntitySet="Players" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Player_Items1" Association="RPGModel.FK_Player_Items1">
+            <End Role="Item" EntitySet="Items" />
+            <End Role="Player" EntitySet="Players" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Player">
+          <Key>
+            <PropertyRef Name="HitPoints" />
+            <PropertyRef Name="Coins" />
+            <PropertyRef Name="HealthPoints" />
+          </Key>
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="HitPoints" Type="Int32" Nullable="false" />
+          <Property Name="OffensiveItem" Type="Int32" />
+          <Property Name="DefensiveItem" Type="Int32" />
+          <Property Name="Coins" Type="Int32" Nullable="false" />
+          <Property Name="HealthPoints" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Item" Relationship="RPGModel.FK_Player_Items" FromRole="Player" ToRole="Item" />
+          <NavigationProperty Name="Item1" Relationship="RPGModel.FK_Player_Items1" FromRole="Player" ToRole="Item" />
+        </EntityType>
+        <Association Name="FK_Player_Items">
+          <End Type="RPGModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="RPGModel.Player" Role="Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="DefensiveItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Player_Items1">
+          <End Type="RPGModel.Item" Role="Item" Multiplicity="0..1" />
+          <End Type="RPGModel.Player" Role="Player" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Item">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Player">
+              <PropertyRef Name="OffensiveItem" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="RPGModelStoreContainer" CdmEntityContainer="RPGEntities">
+          <EntitySetMapping Name="Items">
+            <EntityTypeMapping TypeName="RPGModel.Item">
+              <MappingFragment StoreEntitySet="Items">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
+                <ScalarProperty Name="inInventory" ColumnName="inInventory" />
+                <ScalarProperty Name="Category" ColumnName="Category" />
+                <ScalarProperty Name="DefensePoints" ColumnName="DefensePoints" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Monsters">
+            <EntityTypeMapping TypeName="RPGModel.Monster">
+              <MappingFragment StoreEntitySet="Monsters">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HealthPoints" ColumnName="HealthPoints" />
+                <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
+                <ScalarProperty Name="DefensePoints" ColumnName="DefensePoints" />
+                <ScalarProperty Name="isFinal" ColumnName="isFinal" />
+                <ScalarProperty Name="CoinDrop" ColumnName="CoinDrop" />
+                <ScalarProperty Name="Defeated" ColumnName="Defeated" />
+                <ScalarProperty Name="itemID" ColumnName="itemID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Players">
+            <EntityTypeMapping TypeName="RPGModel.Player">
+              <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="HealthPoints" ColumnName="HealthPoints" />
+                <ScalarProperty Name="Coins" ColumnName="Coins" />
+                <ScalarProperty Name="DefensiveItem" ColumnName="DefensiveItem" />
+                <ScalarProperty Name="OffensiveItem" ColumnName="OffensiveItem" />
+                <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

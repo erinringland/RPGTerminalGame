@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="RPGModelStoreContainer" CdmEntityContainer="RPGEntities">
+    <EntitySetMapping Name="Items">
+      <EntityTypeMapping TypeName="RPGModel.Item">
+        <MappingFragment StoreEntitySet="Items">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
+          <ScalarProperty Name="inInventory" ColumnName="inInventory" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="DefensePoints" ColumnName="DefensePoints" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Monsters">
+      <EntityTypeMapping TypeName="RPGModel.Monster">
+        <MappingFragment StoreEntitySet="Monsters">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="HealthPoints" ColumnName="HealthPoints" />
+          <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
+          <ScalarProperty Name="DefensePoints" ColumnName="DefensePoints" />
+          <ScalarProperty Name="isFinal" ColumnName="isFinal" />
+          <ScalarProperty Name="CoinDrop" ColumnName="CoinDrop" />
+          <ScalarProperty Name="Defeated" ColumnName="Defeated" />
+          <ScalarProperty Name="itemID" ColumnName="itemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Players">
+      <EntityTypeMapping TypeName="RPGModel.Player">
+        <MappingFragment StoreEntitySet="Player">
+          <ScalarProperty Name="HealthPoints" ColumnName="HealthPoints" />
+          <ScalarProperty Name="Coins" ColumnName="Coins" />
+          <ScalarProperty Name="DefensiveItem" ColumnName="DefensiveItem" />
+          <ScalarProperty Name="OffensiveItem" ColumnName="OffensiveItem" />
+          <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
