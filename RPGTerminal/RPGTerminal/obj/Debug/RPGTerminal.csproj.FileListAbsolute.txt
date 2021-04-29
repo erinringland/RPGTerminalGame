@@ -10,3 +10,14 @@ C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminal\RP
 C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminal\RPGTerminal\obj\Debug\RPGTerminal.csproj.CopyComplete
 C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminal\RPGTerminal\obj\Debug\RPGTerminal.exe
 C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminal\RPGTerminal\obj\Debug\RPGTerminal.pdb
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\bin\Debug\RPGTerminal.exe.config
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\bin\Debug\RPGTerminal.exe
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\bin\Debug\RPGTerminal.pdb
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\bin\Debug\EntityFramework.dll
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\bin\Debug\EntityFramework.xml
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\obj\Debug\RPGTerminal.csproj.CoreCompileInputs.cache
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\obj\Debug\RPGTerminal.csproj.CopyComplete
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\obj\Debug\RPGTerminal.exe
+C:\Users\Erin\OneDrive - mitt.ca\Documents\Back End\Side Projects\RPGTerminalGame\RPGTerminal\RPGTerminal\obj\Debug\RPGTerminal.pdb

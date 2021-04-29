@@ -14,14 +14,12 @@ namespace RPGTerminal
     
     public partial class Player
     {
+        public int ID { get; set; }
         public string Name { get; set; }
-        public int HitPoints { get; set; }
-        public Nullable<int> OffensiveItem { get; set; }
-        public Nullable<int> DefensiveItem { get; set; }
         public int Coins { get; set; }
         public int HealthPoints { get; set; }
-    
-        public virtual Item Item { get; set; }
-        public virtual Item Item1 { get; set; }
+        public int HitPoints { get; set; }
+        public bool isCurrent { get; set; }
+        public int Score { get; set; }
     }
 }

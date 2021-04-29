@@ -31,12 +31,13 @@
     <EntitySetMapping Name="Players">
       <EntityTypeMapping TypeName="RPGModel.Player">
         <MappingFragment StoreEntitySet="Player">
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="isCurrent" ColumnName="isCurrent" />
+          <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
           <ScalarProperty Name="HealthPoints" ColumnName="HealthPoints" />
           <ScalarProperty Name="Coins" ColumnName="Coins" />
-          <ScalarProperty Name="DefensiveItem" ColumnName="DefensiveItem" />
-          <ScalarProperty Name="OffensiveItem" ColumnName="OffensiveItem" />
-          <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

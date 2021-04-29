@@ -30,33 +30,18 @@
           <Property Name="Defeated" Type="bit" Nullable="false" />
           <Property Name="itemID" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'RPG.dbo.Player' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="Player">
           <Key>
-            <PropertyRef Name="HitPoints" />
-            <PropertyRef Name="Coins" />
-            <PropertyRef Name="HealthPoints" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Name" Type="varchar" MaxLength="50" />
-          <Property Name="HitPoints" Type="int" Nullable="false" />
-          <Property Name="OffensiveItem" Type="int" />
-          <Property Name="DefensiveItem" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Coins" Type="int" Nullable="false" />
           <Property Name="HealthPoints" Type="int" Nullable="false" />
+          <Property Name="HitPoints" Type="int" Nullable="false" />
+          <Property Name="isCurrent" Type="bit" Nullable="false" />
+          <Property Name="Score" Type="int" Nullable="false" />
         </EntityType>
-        <Association Name="DefensiveItems">
-          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
-          <End Role="Player" Type="Self.Player" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Items">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Player">
-              <PropertyRef Name="DefensiveItem" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Monsters_Items">
           <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
           <End Role="Monsters" Type="Self.Monsters" Multiplicity="*" />
@@ -69,42 +54,13 @@ warning 6002: The table/view 'RPG.dbo.Player' does not have a primary key define
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="OffensiveItems">
-          <End Role="Items" Type="Self.Items" Multiplicity="0..1" />
-          <End Role="Player" Type="Self.Player" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Items">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Player">
-              <PropertyRef Name="OffensiveItem" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="RPGModelStoreContainer">
           <EntitySet Name="Items" EntityType="Self.Items" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Monsters" EntityType="Self.Monsters" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Player" EntityType="Self.Player" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [Player].[Name] AS [Name], 
-    [Player].[HitPoints] AS [HitPoints], 
-    [Player].[OffensiveItem] AS [OffensiveItem], 
-    [Player].[DefensiveItem] AS [DefensiveItem], 
-    [Player].[Coins] AS [Coins], 
-    [Player].[HealthPoints] AS [HealthPoints]
-    FROM [dbo].[Player] AS [Player]</DefiningQuery>
-          </EntitySet>
-          <AssociationSet Name="DefensiveItems" Association="Self.DefensiveItems">
-            <End Role="Items" EntitySet="Items" />
-            <End Role="Player" EntitySet="Player" />
-          </AssociationSet>
+          <EntitySet Name="Player" EntityType="Self.Player" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Monsters_Items" Association="Self.FK_Monsters_Items">
             <End Role="Items" EntitySet="Items" />
             <End Role="Monsters" EntitySet="Monsters" />
-          </AssociationSet>
-          <AssociationSet Name="OffensiveItems" Association="Self.OffensiveItems">
-            <End Role="Items" EntitySet="Items" />
-            <End Role="Player" EntitySet="Player" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -122,9 +78,7 @@ warning 6002: The table/view 'RPG.dbo.Player' does not have a primary key define
           <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DefensePoints" Type="Double" />
           <NavigationProperty Name="Monsters" Relationship="Self.FK_Monsters_Items" FromRole="Items" ToRole="Monsters" />
-          <NavigationProperty Name="Players" Relationship="RPGModel.FK_Player_Items" FromRole="Item" ToRole="Player" />
-          <NavigationProperty Name="Players1" Relationship="RPGModel.FK_Player_Items1" FromRole="Item" ToRole="Player" />
-        </EntityType>
+          </EntityType>
         <EntityType Name="Monster">
           <Key>
             <PropertyRef Name="ID" />
@@ -160,55 +114,20 @@ warning 6002: The table/view 'RPG.dbo.Player' does not have a primary key define
             <End Role="Monsters" EntitySet="Monsters" />
           </AssociationSet>
           <EntitySet Name="Players" EntityType="RPGModel.Player" />
-          <AssociationSet Name="FK_Player_Items" Association="RPGModel.FK_Player_Items">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="Player" EntitySet="Players" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Player_Items1" Association="RPGModel.FK_Player_Items1">
-            <End Role="Item" EntitySet="Items" />
-            <End Role="Player" EntitySet="Players" />
-          </AssociationSet>
-        </EntityContainer>
+          </EntityContainer>
         <EntityType Name="Player">
           <Key>
-            <PropertyRef Name="HitPoints" />
-            <PropertyRef Name="Coins" />
-            <PropertyRef Name="HealthPoints" />
+            <PropertyRef Name="ID" />
           </Key>
-          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="HitPoints" Type="Int32" Nullable="false" />
-          <Property Name="OffensiveItem" Type="Int32" />
-          <Property Name="DefensiveItem" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Coins" Type="Int32" Nullable="false" />
           <Property Name="HealthPoints" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Item" Relationship="RPGModel.FK_Player_Items" FromRole="Player" ToRole="Item" />
-          <NavigationProperty Name="Item1" Relationship="RPGModel.FK_Player_Items1" FromRole="Player" ToRole="Item" />
+          <Property Name="HitPoints" Type="Int32" Nullable="false" />
+          <Property Name="isCurrent" Type="Boolean" Nullable="false" />
+          <Property Name="Score" Type="Int32" Nullable="false" />
         </EntityType>
-        <Association Name="FK_Player_Items">
-          <End Type="RPGModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="RPGModel.Player" Role="Player" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Player">
-              <PropertyRef Name="DefensiveItem" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Player_Items1">
-          <End Type="RPGModel.Item" Role="Item" Multiplicity="0..1" />
-          <End Type="RPGModel.Player" Role="Player" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Item">
-              <PropertyRef Name="ID" />
-            </Principal>
-            <Dependent Role="Player">
-              <PropertyRef Name="OffensiveItem" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -244,12 +163,13 @@ warning 6002: The table/view 'RPG.dbo.Player' does not have a primary key define
           <EntitySetMapping Name="Players">
             <EntityTypeMapping TypeName="RPGModel.Player">
               <MappingFragment StoreEntitySet="Player">
+                <ScalarProperty Name="Score" ColumnName="Score" />
+                <ScalarProperty Name="isCurrent" ColumnName="isCurrent" />
+                <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
                 <ScalarProperty Name="HealthPoints" ColumnName="HealthPoints" />
                 <ScalarProperty Name="Coins" ColumnName="Coins" />
-                <ScalarProperty Name="DefensiveItem" ColumnName="DefensiveItem" />
-                <ScalarProperty Name="OffensiveItem" ColumnName="OffensiveItem" />
-                <ScalarProperty Name="HitPoints" ColumnName="HitPoints" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
