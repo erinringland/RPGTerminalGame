@@ -35,9 +35,9 @@ namespace RPGTerminal
         }
         public void Start()
         {
-            Console.WriteLine("Hello");
+            //Console.WriteLine("Hello"); // Uncomment closer to the end of the project
 
-            //GetHeroName(); Uncomment closer to the end of the project
+            //GetHeroName(); // Uncomment closer to the end of the project
 
             Player currPlayer = db.Players.FirstOrDefault(p => p.isCurrent == true);
 
