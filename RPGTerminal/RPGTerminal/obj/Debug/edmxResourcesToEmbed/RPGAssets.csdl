@@ -11,8 +11,6 @@
     <Property Name="Category" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="DefensePoints" Type="Double" />
     <NavigationProperty Name="Monsters" Relationship="Self.FK_Monsters_Items" FromRole="Items" ToRole="Monsters" />
-    <NavigationProperty Name="Players" Relationship="RPGModel.FK_Player_Items" FromRole="Item" ToRole="Player" />
-    <NavigationProperty Name="Players1" Relationship="RPGModel.FK_Player_Items1" FromRole="Item" ToRole="Player" />
   </EntityType>
   <EntityType Name="Monster">
     <Key>
@@ -49,52 +47,17 @@
       <End Role="Monsters" EntitySet="Monsters" />
     </AssociationSet>
     <EntitySet Name="Players" EntityType="RPGModel.Player" />
-    <AssociationSet Name="FK_Player_Items" Association="RPGModel.FK_Player_Items">
-      <End Role="Item" EntitySet="Items" />
-      <End Role="Player" EntitySet="Players" />
-    </AssociationSet>
-    <AssociationSet Name="FK_Player_Items1" Association="RPGModel.FK_Player_Items1">
-      <End Role="Item" EntitySet="Items" />
-      <End Role="Player" EntitySet="Players" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Player">
     <Key>
-      <PropertyRef Name="HitPoints" />
-      <PropertyRef Name="Coins" />
-      <PropertyRef Name="HealthPoints" />
+      <PropertyRef Name="ID" />
     </Key>
-    <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="HitPoints" Type="Int32" Nullable="false" />
-    <Property Name="OffensiveItem" Type="Int32" />
-    <Property Name="DefensiveItem" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Coins" Type="Int32" Nullable="false" />
     <Property Name="HealthPoints" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Item" Relationship="RPGModel.FK_Player_Items" FromRole="Player" ToRole="Item" />
-    <NavigationProperty Name="Item1" Relationship="RPGModel.FK_Player_Items1" FromRole="Player" ToRole="Item" />
+    <Property Name="HitPoints" Type="Int32" Nullable="false" />
+    <Property Name="isCurrent" Type="Boolean" Nullable="false" />
+    <Property Name="Score" Type="Int32" Nullable="false" />
   </EntityType>
-  <Association Name="FK_Player_Items">
-    <End Type="RPGModel.Item" Role="Item" Multiplicity="0..1" />
-    <End Type="RPGModel.Player" Role="Player" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Item">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Player">
-        <PropertyRef Name="DefensiveItem" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <Association Name="FK_Player_Items1">
-    <End Type="RPGModel.Item" Role="Item" Multiplicity="0..1" />
-    <End Type="RPGModel.Player" Role="Player" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Item">
-        <PropertyRef Name="ID" />
-      </Principal>
-      <Dependent Role="Player">
-        <PropertyRef Name="OffensiveItem" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
 </Schema>

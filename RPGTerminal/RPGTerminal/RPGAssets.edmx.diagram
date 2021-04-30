@@ -8,10 +8,8 @@
         <EntityTypeShape EntityType="RPGModel.Item" Width="1.5" PointX="5.375" PointY="1.25" IsExpanded="true" />
         <EntityTypeShape EntityType="RPGModel.Monster" Width="1.5" PointX="3" PointY="1" IsExpanded="true" />
         <AssociationConnector Association="RPGModel.FK_Monsters_Items" ManuallyRouted="false" />
-        <EntityTypeShape EntityType="RPGModel.Player" Width="1.5" PointX="7.625" PointY="1.375" />
-        <AssociationConnector Association="RPGModel.FK_Player_Items" />
-        <AssociationConnector Association="RPGModel.FK_Player_Items1" />
-      </Diagram>
+        <EntityTypeShape EntityType="RPGModel.Player" Width="1.5" PointX="0.75" PointY="4.75" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

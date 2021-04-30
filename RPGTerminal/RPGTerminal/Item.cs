@@ -18,8 +18,6 @@ namespace RPGTerminal
         public Item()
         {
             this.Monsters = new HashSet<Monster>();
-            this.Players = new HashSet<Player>();
-            this.Players1 = new HashSet<Player>();
         }
     
         public int ID { get; set; }
@@ -31,9 +29,5 @@ namespace RPGTerminal
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Monster> Monsters { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Player> Players { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Player> Players1 { get; set; }
     }
 }
